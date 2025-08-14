@@ -16,6 +16,33 @@ import {
   Award
 } from 'lucide-react'
 
+// Type definitions
+type Job = {
+  title: string
+  company: string
+  period: string
+  duration: string
+  location: string
+  category: string
+  description: string
+  achievements: string[]
+  tech: string[]
+}
+
+type Fellowship = {
+  title: string
+  period: string
+  duration: string
+  organization: string
+  location: string
+  category: string
+  description: string
+  achievements: string[]
+  tech: string[]
+}
+
+type JobOrFellowship = Job | Fellowship
+
 const ExperienceSection = () => {
   const [ref, inView] = useInView({
     triggerOnce: true,
@@ -56,7 +83,7 @@ const ExperienceSection = () => {
     { name: 'Databricks', category: 'Platform', level: 85, years: 3, icon: Cloud }
   ]
 
-  const jobHistory = [
+  const jobHistory: Job[] = [
     {
       title: 'Data Engineer II',
       company: 'Irembo',
@@ -119,7 +146,7 @@ const ExperienceSection = () => {
     }
   ]
 
-  const fellowship = {
+  const fellowship: Fellowship = {
     title: 'Global Health Corps Fellowship',
     period: '2021-2022',
     duration: '1 year',
@@ -138,7 +165,7 @@ const ExperienceSection = () => {
 
   const categories = ['All', 'Data Engineering', 'Data Analytics', 'Quality Assurance', 'Healthcare Technology', 'Fellowship']
 
-  const filteredJobs = activeFilter === 'All' 
+  const filteredJobs: JobOrFellowship[] = activeFilter === 'All' 
     ? [...jobHistory, fellowship]
     : activeFilter === 'Fellowship'
     ? [fellowship]
@@ -165,6 +192,14 @@ const ExperienceSection = () => {
         return 'neon-green'
       default:
         return 'neon-blue'
+    }
+  }
+
+  const getOrganizationName = (item: JobOrFellowship): string => {
+    if ('company' in item) {
+      return item.company
+    } else {
+      return item.organization
     }
   }
 
@@ -287,7 +322,7 @@ const ExperienceSection = () => {
                         <h4 className="text-xl font-bold text-smoke-800 group-hover:text-neon-blue transition-colors duration-300">
                           {job.title}
                         </h4>
-                        <div className="text-neon-green font-medium text-lg">{job.company || job.organization}</div>
+                        <div className="text-neon-green font-medium text-lg">{getOrganizationName(job)}</div>
                         <div className="text-smoke-600 text-sm mb-1">{job.period} • {job.duration}</div>
                         <div className="text-smoke-500 text-sm flex items-center gap-1">
                           <Globe className="w-4 h-4" />
