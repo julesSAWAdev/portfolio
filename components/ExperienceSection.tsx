@@ -80,7 +80,9 @@ const ExperienceSection = () => {
     { name: 'Data Analytics', category: 'Core', level: 85, years: 4, icon: TrendingUp },
     { name: 'Qlik Sense', category: 'BI Tools', level: 85, years: 3, icon: TrendingUp },
     { name: 'Java', category: 'Programming', level: 85, years: 3, icon: Code },
-    { name: 'Databricks', category: 'Platform', level: 85, years: 3, icon: Cloud }
+    { name: 'Databricks', category: 'Platform', level: 85, years: 3, icon: Cloud },
+    { name: 'UWB Data', category: 'Specialized', level: 85, years: 3, icon: Database },
+    { name: 'Airflow', category: 'Orchestration', level: 85, years: 3, icon: Zap }
   ]
 
   const jobHistory: Job[] = [
